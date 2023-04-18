@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesores</title>
-</head>
-<body style="color:gray">
-    <h1>Vista Profesores</h1>
-</body>
-</html>
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+    <div class="text-center mt-4 text-primary">
+        <h2>Nuestros profesores:</h2>
+    </div>
+{% endblock contenidoQueCambia %}

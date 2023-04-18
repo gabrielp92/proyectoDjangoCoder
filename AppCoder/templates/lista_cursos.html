@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursos</title>
-</head>
-<body>
-    <h2>Cursos disponibles:</h2>
-    <ul>
-    {% for curso in lista_cursos %}
-        <li>{{curso.nombre}}</li>
-    {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+    <div class="text-center mt-4">
+        <h2>Nuestro cursos disponibles:</h2>
+        <ul class="fs-2 text-primary">
+        {% for curso in lista_cursos %}
+            <li>{{curso.nombre}}</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock contenidoQueCambia %}

@@ -15,15 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-#from AppCoder.views import saludo, segunda_view, dia_de_hoy, saluda_con_nombre, probando_template
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app-coder/', include('AppCoder.urls'))
-    
-    #path('saludo/', saludo),
-    #path('otravista/', segunda_view),
-    #path('diadehoy/', dia_de_hoy),
-    #path('saluda-nombre/<nombre>', saluda_con_nombre),
-    #path('probando-template/', probando_template)
+
 ]
