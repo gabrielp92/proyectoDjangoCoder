@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-#from django.template import Template, Context, loader
-#from datetime import datetime
 from .models import Curso, Estudiante, Entregable, Profesor
-from .forms import ProfesorFormulario, EstudianteFormulario
+from .forms import ProfesorFormulario, EstudianteFormulario, EntregableFormulario
+#from datetime import datetime
 
 def inicio(self):
     return render(self, "inicio.html") 
@@ -26,7 +25,8 @@ def profesores(self):
     return render(self, "profesores.html", {"profesores": lista_profesores})
 
 def entregables(self):
-    return render(self, "entregables.html") 
+    lista_entregables = Entregable.objects.all()
+    return render(self, "entregables.html", {"entregables": lista_entregables})
 
 def buscar(request):
     if request.GET['nombre']:
@@ -73,3 +73,19 @@ def profesorFormulario(request):
     else:
         miFormulario = ProfesorFormulario()
         return render(request, "profesorFormulario.html", {"miFormulario": miFormulario})
+
+def entregableFormulario(request):
+    if request.method == 'POST':
+        miFormulario = EntregableFormulario(request.POST)
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            entregable = Entregable(
+                nombre=data['nombre'], fecha_entrega=data['fecha_entrega'], entregado=data['entregado'])
+            entregable.save()
+            lista_entregables = Entregable.objects.all()
+            return render(request, 'entregables.html', {"entregables": lista_entregables})
+        else:
+            return HttpResponse('<script>alert("Datos de formulario invalidos")</script>')
+    else:
+        miFormulario = EntregableFormulario()
+        return render(request, "entregableFormulario.html", {"miFormulario": miFormulario})

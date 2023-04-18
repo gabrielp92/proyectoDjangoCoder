@@ -1,9 +1,13 @@
 {% extends "padre.html" %}
-
 {% load static %}
-
 {% block contenidoQueCambia %}
-    <div class="text-center mt-4 text-primary">
-        <h2>Entregables:</h2>
-    </div>
+<div class="container text-center mt-4 text-primary">    
+    <a href="{% url 'EntregableFormulario' %}" class="btn btn-primary mt-4 mb-4">Crear Entregable</a>
+    <h2>Entregables:</h2>
+    <ul class="fs-2">
+        {% for entregable in entregables %}
+            {{entregable.nombre}} - {{entregable.fecha_entrega}}<br>
+        {% endfor %}
+    </ul>
+</div>  
 {% endblock contenidoQueCambia %}
