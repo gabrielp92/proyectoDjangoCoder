@@ -1,9 +1,18 @@
 {% extends "padre.html" %}
-
 {% load static %}
-
 {% block contenidoQueCambia %}
-    <div class="text-center mt-4 text-primary">
-        <h2>Nuestros Estudiantes:</h2>
-    </div>
+<div class="container text-center mt-4 text-primary">    
+    <a href="{% url 'EstudianteFormulario' %}" class="btn btn-primary mt-4 mb-4">Crear Estudiante</a>
+    <h2>Nuestros estudiantes:</h2>
+    <ul class="fs-2">
+        {% for estudiante in estudiantes %}
+            {{estudiante.nombre}} {{estudiante.apellido}}<br>
+        {% endfor %}
+    </ul>
+</div>  
 {% endblock contenidoQueCambia %}
+
+
+
+
+

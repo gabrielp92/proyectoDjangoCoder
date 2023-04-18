@@ -3,6 +3,7 @@ from django.http import HttpResponse
 #from django.template import Template, Context, loader
 #from datetime import datetime
 from .models import Curso, Estudiante, Entregable, Profesor
+from .forms import ProfesorFormulario, EstudianteFormulario
 
 def inicio(self):
     return render(self, "inicio.html") 
@@ -17,10 +18,12 @@ def lista_cursos(self):
     return render(self, "lista_cursos.html", {"lista_cursos": lista})
     
 def estudiantes(self):
-    return render(self, "estudiantes.html")    
-    
+    lista_estudiantes = Estudiante.objects.all()
+    return render(self, "estudiantes.html", {"estudiantes": lista_estudiantes})
+  
 def profesores(self):
-    return render(self, "profesores.html") 
+    lista_profesores = Profesor.objects.all()
+    return render(self, "profesores.html", {"profesores": lista_profesores})
 
 def entregables(self):
     return render(self, "entregables.html") 
@@ -35,3 +38,38 @@ def buscar(request):
 
 def busquedaComision(request):
     return render(request, 'busquedaComision.html')
+
+def estudianteFormulario(request):
+    if request.method == 'POST':
+        miFormulario = EstudianteFormulario(request.POST)
+        print(miFormulario)
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            print(data)
+            estudiante = Estudiante(
+                nombre=data['nombre'], apellido=data['apellido'], email=data['email'])
+            estudiante.save()
+            lista_estudiantes = Estudiante.objects.all()
+            return render(request, 'estudiantes.html', {"estudiantes": lista_estudiantes})
+        else:
+            return HttpResponse('<script>alert("Datos de formulario invalidos")</script>')
+    else:
+        miFormulario = EstudianteFormulario()
+        return render(request, "estudianteFormulario.html", {"miFormulario": miFormulario})
+
+def profesorFormulario(request):
+    if request.method == 'POST':
+        miFormulario = ProfesorFormulario(request.POST)
+        print(miFormulario)
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            profesor = Profesor(
+                nombre=data['nombre'], apellido=data['apellido'], email=data['email'], profesion=data['profesion'])
+            profesor.save()
+            lista_profesores = Profesor.objects.all()
+            return render(request, 'profesores.html', {"profesores": lista_profesores})
+        else:
+            return HttpResponse('<script>alert("Datos de formulario invalidos")</script>')
+    else:
+        miFormulario = ProfesorFormulario()
+        return render(request, "profesorFormulario.html", {"miFormulario": miFormulario})

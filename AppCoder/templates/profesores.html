@@ -1,9 +1,13 @@
 {% extends "padre.html" %}
-
 {% load static %}
-
 {% block contenidoQueCambia %}
-    <div class="text-center mt-4 text-primary">
-        <h2>Nuestros profesores:</h2>
-    </div>
+<div class="container text-center mt-4 text-primary">    
+    <a href="{% url 'ProfesorFormulario' %}" class="btn btn-primary mt-4 mb-4">Crear Profesor</a>
+    <h2>Nuestros profesores:</h2>
+    <ul class="fs-2">
+        {% for profesor in profesores %}
+            {{profesor.nombre}} {{profesor.apellido}}<br>
+        {% endfor %}
+    </ul>
+</div>  
 {% endblock contenidoQueCambia %}
