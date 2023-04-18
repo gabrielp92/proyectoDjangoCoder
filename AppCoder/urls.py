@@ -7,5 +7,10 @@ urlpatterns = [
     path('', views.inicio, name="Inicio"),
     path('estudiantes/', views.estudiantes, name="Estudiantes"),
     path('profesores/', views.profesores, name="Profesores"),
-    path('entregables', views.entregables, name="Entregables")
+    path('entregables', views.entregables, name="Entregables"),
+    
+    path("busquedaComision", views.busquedaComision, name="BusquedaComision"),
+    path('buscar/', views.buscar, name="Buscar"),
+    
+    
 ]
